@@ -1,0 +1,268 @@
+:root {
+  --bg0: #05060f;
+  --bg1: #0b0f24;
+  --neon-pink: #ff3df5;
+  --neon-cyan: #2ff7ff;
+  --neon-purple: #9b5cff;
+  --neon-yellow: #ffe14d;
+  --panel-bg: rgba(14, 18, 40, 0.72);
+  --panel-border: rgba(120, 140, 255, 0.25);
+  --text: #e7ecff;
+  --text-dim: #97a0d0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 20%, var(--bg1), var(--bg0) 70%);
+  color: var(--text);
+  font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------- タイトル ---------- */
+#title-bar {
+  position: fixed;
+  top: 22px;
+  left: 28px;
+  z-index: 5;
+  pointer-events: none;
+  text-shadow: 0 0 18px rgba(47, 247, 255, 0.5);
+}
+#title-bar h1 {
+  font-size: 30px;
+  letter-spacing: 4px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+#title-bar h1 span {
+  color: var(--neon-yellow);
+  -webkit-text-fill-color: var(--neon-yellow);
+}
+#title-bar p {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+/* ---------- コントロールパネル ---------- */
+#panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 6;
+  width: 320px;
+  height: 100%;
+  padding: 24px 22px;
+  overflow-y: auto;
+  background: var(--panel-bg);
+  backdrop-filter: blur(14px);
+  border-left: 1px solid var(--panel-border);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.group {
+  margin-bottom: 26px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(120, 140, 255, 0.12);
+}
+.group:last-child { border-bottom: none; }
+
+.group h2 {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--neon-cyan);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+/* 波形ボタン */
+.wave-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.wave-buttons button {
+  padding: 12px 4px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.wave-buttons button:hover { background: rgba(155, 92, 255, 0.25); }
+.wave-buttons button.active {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+  border-color: transparent;
+  box-shadow: 0 0 18px rgba(255, 61, 245, 0.55);
+  font-weight: 700;
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+.hint b { color: var(--neon-yellow); }
+
+/* スライダー */
+label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+label span {
+  float: right;
+  color: var(--neon-cyan);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  margin-top: 9px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px var(--neon-cyan);
+  border: 2px solid var(--neon-purple);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px var(--neon-cyan);
+  border: 2px solid var(--neon-purple);
+}
+
+/* 演奏ボタン */
+button.play, button.hold {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.2s ease;
+}
+button.play {
+  background: linear-gradient(135deg, var(--neon-cyan), #1f8bff);
+  color: #001020;
+  box-shadow: 0 0 22px rgba(47, 247, 255, 0.45);
+}
+button.hold {
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+  color: #fff;
+  box-shadow: 0 0 22px rgba(255, 61, 245, 0.4);
+}
+button.play:active, button.hold:active { transform: scale(0.96); }
+
+/* ---------- 凡例 ---------- */
+#legend {
+  position: fixed;
+  bottom: 18px;
+  left: 28px;
+  z-index: 5;
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+#legend i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 5px;
+  vertical-align: -2px;
+}
+.ax-x { background: var(--neon-pink); }
+.ax-z { background: var(--neon-cyan); }
+.ax-y { background: var(--neon-yellow); }
+.ax-c { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink)); }
+
+/* ---------- 開始オーバーレイ ---------- */
+#start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 4, 12, 0.92);
+  backdrop-filter: blur(6px);
+  transition: opacity 0.5s ease;
+}
+#start-overlay.hidden { opacity: 0; pointer-events: none; }
+.start-card {
+  text-align: center;
+  padding: 44px 52px;
+  border-radius: 20px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 0 60px rgba(155, 92, 255, 0.3);
+}
+.start-card h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.start-card p { color: var(--text-dim); margin-bottom: 24px; }
+#start-btn {
+  padding: 14px 40px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #001020;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-yellow));
+  box-shadow: 0 0 30px rgba(47, 247, 255, 0.5);
+}
+#start-btn:active { transform: scale(0.96); }
+
+/* レスポンシブ */
+@media (max-width: 720px) {
+  #panel { width: 100%; height: auto; bottom: 0; top: auto; max-height: 55%; }
+  #title-bar { font-size: 12px; }
+  #legend { display: none; }
+}
