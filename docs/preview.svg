@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" font-family="Segoe UI, sans-serif">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="20%" r="90%">
+      <stop offset="0%" stop-color="#0b0f24"/>
+      <stop offset="100%" stop-color="#05060f"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2ff7ff"/>
+      <stop offset="100%" stop-color="#ff3df5"/>
+    </linearGradient>
+    <linearGradient id="surf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2ff7ff"/>
+      <stop offset="50%" stop-color="#9b5cff"/>
+      <stop offset="100%" stop-color="#ff3df5"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="420" fill="url(#bg)"/>
+
+  <!-- grid floor -->
+  <g stroke="#2a3170" stroke-width="1" opacity="0.5">
+    <line x1="100" y1="340" x2="800" y2="340"/>
+    <line x1="160" y1="300" x2="740" y2="300"/>
+    <line x1="210" y1="270" x2="690" y2="270"/>
+  </g>
+
+  <!-- waveform surface (stylized) -->
+  <g opacity="0.9">
+    <path d="M120,260 Q210,180 300,250 T480,250 T660,250 T780,250 L780,300 Q690,360 600,300 T420,300 T240,300 T120,300 Z" fill="url(#surf)" opacity="0.85"/>
+    <path d="M150,230 Q240,160 330,225 T510,225 T690,225" fill="none" stroke="#ffe14d" stroke-width="2" opacity="0.9"/>
+  </g>
+
+  <!-- oscilloscope ring -->
+  <ellipse cx="450" cy="160" rx="120" ry="34" fill="none" stroke="#ffe14d" stroke-width="2" opacity="0.85"/>
+  <ellipse cx="450" cy="160" rx="124" ry="40" fill="none" stroke="#ff3df5" stroke-width="4" opacity="0.25"/>
+
+  <!-- title -->
+  <text x="40" y="56" font-size="34" font-weight="800" fill="url(#title)" letter-spacing="3">🎛️ SYNTH LAB <tspan fill="#ffe14d">3D</tspan></text>
+  <text x="42" y="82" font-size="14" fill="#97a0d0">パラメーターを動かして、音色・波形・3Dの変化を体感しよう</text>
+
+  <!-- legend -->
+  <g font-size="13" fill="#97a0d0">
+    <rect x="40" y="378" width="12" height="12" rx="3" fill="#ff3df5"/><text x="58" y="389">X = 波形（位相）</text>
+    <rect x="190" y="378" width="12" height="12" rx="3" fill="#2ff7ff"/><text x="208" y="389">Z = 時間（エンベロープ）</text>
+    <rect x="390" y="378" width="12" height="12" rx="3" fill="#ffe14d"/><text x="408" y="389">Y = 振幅</text>
+    <rect x="510" y="378" width="12" height="12" rx="3" fill="#9b5cff"/><text x="528" y="389">色 = 倍音の豊かさ</text>
+  </g>
+
+  <!-- panel -->
+  <g>
+    <rect x="690" y="100" width="180" height="240" rx="12" fill="#0e1228" opacity="0.8" stroke="#7888ff" stroke-opacity="0.25"/>
+    <text x="710" y="128" font-size="12" fill="#2ff7ff" letter-spacing="2">WAVEFORM</text>
+    <rect x="710" y="138" width="68" height="28" rx="8" fill="#9b5cff"/><text x="722" y="156" font-size="12" fill="#fff">∿ Sine</text>
+    <rect x="786" y="138" width="68" height="28" rx="8" fill="#1a1f3a"/><text x="796" y="156" font-size="12" fill="#e7ecff">△ Tri</text>
+    <text x="710" y="196" font-size="12" fill="#2ff7ff" letter-spacing="2">ADSR</text>
+    <rect x="710" y="206" width="144" height="6" rx="3" fill="url(#title)"/>
+    <rect x="710" y="226" width="144" height="6" rx="3" fill="url(#title)"/>
+    <rect x="710" y="246" width="144" height="6" rx="3" fill="url(#title)"/>
+    <rect x="710" y="266" width="144" height="6" rx="3" fill="url(#title)"/>
+  </g>
+</svg>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synth Lab 3D — 波形とパラメーターのビジュアライザー</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- 3D描画キャンバス -->
+  <canvas id="scene"></canvas>
+
+  <!-- タイトル -->
+  <header id="title-bar">
+    <h1>🎛️ SYNTH LAB <span>3D</span></h1>
+    <p>パラメーターを動かして、音色・波形・3Dの変化を体感しよう</p>
+  </header>
+
+  <!-- コントロールパネル -->
+  <aside id="panel">
+    <!-- 波形選択 -->
+    <section class="group">
+      <h2>波形 / WAVEFORM</h2>
+      <div class="wave-buttons" id="wave-buttons">
+        <button data-wave="sine"     class="active">∿ Sine</button>
+        <button data-wave="triangle">△ Triangle</button>
+        <button data-wave="square">⊓ Square</button>
+        <button data-wave="sawtooth">◺ Saw</button>
+      </div>
+      <p class="hint" id="wave-hint">純粋な音。倍音がなく、最もまろやか。</p>
+    </section>
+
+    <!-- エンベロープ ADSR -->
+    <section class="group">
+      <h2>エンベロープ / ADSR</h2>
+      <label>Attack <span id="v-attack">0.05</span>s
+        <input type="range" id="attack" min="0.001" max="2" step="0.001" value="0.05" />
+      </label>
+      <label>Decay <span id="v-decay">0.30</span>s
+        <input type="range" id="decay" min="0.001" max="2" step="0.001" value="0.3" />
+      </label>
+      <label>Sustain <span id="v-sustain">0.60</span>
+        <input type="range" id="sustain" min="0" max="1" step="0.01" value="0.6" />
+      </label>
+      <label>Release <span id="v-release">0.50</span>s
+        <input type="range" id="release" min="0.001" max="3" step="0.001" value="0.5" />
+      </label>
+    </section>
+
+    <!-- 音色 / フィルター -->
+    <section class="group">
+      <h2>音色 / TONE</h2>
+      <label>Filter Cutoff <span id="v-cutoff">8000</span>Hz
+        <input type="range" id="cutoff" min="120" max="12000" step="10" value="8000" />
+      </label>
+      <label>Resonance <span id="v-reso">2.0</span>
+        <input type="range" id="reso" min="0.1" max="20" step="0.1" value="2" />
+      </label>
+      <label>Pitch <span id="v-pitch">A3 (220Hz)</span>
+        <input type="range" id="pitch" min="40" max="80" step="1" value="57" />
+      </label>
+    </section>
+
+    <!-- 演奏 -->
+    <section class="group">
+      <h2>演奏 / PLAY</h2>
+      <button id="play-btn" class="play">▶ デモ再生</button>
+      <button id="hold-btn" class="hold">⏺ ホールド（長押し）</button>
+      <p class="hint">PCキーボード <b>A S D F G H J K</b> でも演奏できます 🎹</p>
+    </section>
+  </aside>
+
+  <!-- 軸ラベルの凡例 -->
+  <footer id="legend">
+    <span><i class="ax-x"></i> X = 波形（位相）</span>
+    <span><i class="ax-z"></i> Z = 時間（エンベロープ）</span>
+    <span><i class="ax-y"></i> Y = 振幅</span>
+    <span><i class="ax-c"></i> 色 = 倍音の豊かさ</span>
+  </footer>
+
+  <!-- オーディオ開始のオーバーレイ -->
+  <div id="start-overlay">
+    <div class="start-card">
+      <h2>🎵 Synth Lab 3D</h2>
+      <p>ブラウザの音声を有効にするにはクリックしてください</p>
+      <button id="start-btn">タップして開始</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
