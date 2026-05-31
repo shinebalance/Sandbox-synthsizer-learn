@@ -68,7 +68,7 @@ html, body {
   z-index: 6;
   width: 320px;
   height: 100%;
-  padding: 24px 22px;
+  padding: 18px 20px 0;
   overflow-y: auto;
   background: var(--panel-bg);
   backdrop-filter: blur(14px);
@@ -77,18 +77,29 @@ html, body {
 }
 
 .group {
-  margin-bottom: 26px;
-  padding-bottom: 18px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(120, 140, 255, 0.12);
 }
-.group:last-child { border-bottom: none; }
 
 .group h2 {
   font-size: 12px;
   letter-spacing: 2px;
   color: var(--neon-cyan);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   text-transform: uppercase;
+}
+
+/* 演奏セクションをパネル下部に常時固定（スクロールしても届く） */
+.play-group {
+  position: sticky;
+  bottom: 0;
+  margin: 0 -20px;
+  padding: 12px 20px 16px;
+  border-bottom: none;
+  border-top: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+  backdrop-filter: blur(14px);
 }
 
 /* 波形ボタン */
@@ -127,9 +138,10 @@ html, body {
 label {
   display: block;
   font-size: 13px;
-  margin-bottom: 16px;
+  margin-bottom: 11px;
   color: var(--text);
 }
+label:last-child { margin-bottom: 2px; }
 label span {
   float: right;
   color: var(--neon-cyan);
@@ -169,8 +181,8 @@ input[type="range"]::-moz-range-thumb {
 /* 演奏ボタン */
 button.play, button.hold {
   width: 100%;
-  padding: 14px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
   border: none;
   border-radius: 12px;
   font-size: 15px;
@@ -260,9 +272,38 @@ button.play:active, button.hold:active { transform: scale(0.96); }
 }
 #start-btn:active { transform: scale(0.96); }
 
-/* レスポンシブ */
-@media (max-width: 720px) {
-  #panel { width: 100%; height: auto; bottom: 0; top: auto; max-height: 55%; }
-  #title-bar { font-size: 12px; }
+/* ---------- レスポンシブ ---------- */
+
+/* 縦向きスマホ: パネルを画面下部に配置 */
+@media (max-width: 720px) and (orientation: portrait) {
+  #panel {
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    top: auto;
+    max-height: 60%;
+  }
+  #title-bar { top: 14px; left: 18px; }
+  #title-bar h1 { font-size: 22px; letter-spacing: 2px; }
+  #title-bar p { font-size: 11px; }
+  #legend { display: none; }
+}
+
+/* 横向き（背の低い画面）: コンパクトな右サイドパネル */
+@media (orientation: landscape) and (max-height: 560px) {
+  #panel { width: 290px; padding: 10px 14px 0; }
+  .group { margin-bottom: 10px; padding-bottom: 8px; }
+  .group h2 { margin-bottom: 6px; font-size: 11px; }
+  label { margin-bottom: 7px; font-size: 12px; }
+  label input[type="range"] { margin-top: 5px; }
+  /* 波形ボタンを1行に並べて高さを節約 */
+  .wave-buttons { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  .wave-buttons button { padding: 8px 2px; font-size: 11px; }
+  .hint { font-size: 11px; margin-top: 5px; line-height: 1.4; }
+  .play-group { padding-top: 9px; padding-bottom: 12px; }
+  button.play, button.hold { padding: 9px; font-size: 13px; margin-bottom: 6px; }
+  #title-bar { top: 12px; left: 18px; }
+  #title-bar h1 { font-size: 19px; letter-spacing: 2px; }
+  #title-bar p { display: none; }
   #legend { display: none; }
 }
