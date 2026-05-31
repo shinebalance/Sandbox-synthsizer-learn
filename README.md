@@ -64,6 +64,29 @@ npx serve .
 
 ---
 
+## 🌐 GitHub Pages で公開する
+
+完全な静的サイト（ビルド不要・パスはすべて相対参照）なので、そのまま GitHub Pages で
+ホストできます。公開後の URL は `https://<ユーザー名>.github.io/<リポジトリ名>/` です。
+
+### 方法 A: GitHub Actions で自動公開（推奨）
+
+このリポジトリには `.github/workflows/deploy-pages.yml` を同梱しています。
+
+1. リポジトリの **Settings → Pages** を開く
+2. **Build and deployment → Source** を **「GitHub Actions」** に設定
+3. 以降、`main` ブランチに push されるたびに自動でデプロイされます
+
+### 方法 B: ブランチから直接公開（Actions 不要）
+
+1. **Settings → Pages** を開く
+2. **Source** を **「Deploy from a branch」** にする
+3. Branch を **`main` / `(root)`** に設定して保存
+
+どちらの場合も `index.html` がそのままトップページになります。
+
+---
+
 ## 🧠 学べるポイント
 
 - **波形の違い** が倍音（音の明るさ・リッチさ）と音色にどう効くか
