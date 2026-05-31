@@ -69,15 +69,15 @@ export class Visualizer {
 
   _initScene() {
     this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.FogExp2(0x05060f, 0.012);
+    this.scene.fog = new THREE.FogExp2(0x05060f, 0.008);
 
     this.camera = new THREE.PerspectiveCamera(
-      55,
+      50,
       window.innerWidth / window.innerHeight,
       0.1,
       300
     );
-    this.camera.position.set(0, 22, 38);
+    this.camera.position.set(0, 14, 30);
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas,
@@ -90,11 +90,11 @@ export class Visualizer {
     this.controls = new OrbitControls(this.camera, this.canvas);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.06;
-    this.controls.target.set(0, 0, 0);
+    this.controls.target.set(0, 4, -1);
     this.controls.autoRotate = true;
     this.controls.autoRotateSpeed = 0.6;
-    this.controls.minDistance = 18;
-    this.controls.maxDistance = 80;
+    this.controls.minDistance = 14;
+    this.controls.maxDistance = 70;
 
     // ライト
     this.scene.add(new THREE.AmbientLight(0x404060, 1.2));
@@ -177,7 +177,7 @@ export class Visualizer {
         const phase = ((xi / (nx - 1)) * this.cycles) % 1;
         const sample = waveSample(p.wave, phase);
 
-        const amp = sample * env * 6.0; // Y の高さ
+        const amp = sample * env * 8.5; // Y の高さ
         pos.setY(i, amp);
 
         // 色: 倍音の豊かさで色相、振幅で明るさ
@@ -211,7 +211,7 @@ export class Visualizer {
       opacity: 0.95,
     });
     this.scope = new THREE.Line(g, m);
-    this.scope.position.y = 11;
+    this.scope.position.y = 9.5;
     this.scene.add(this.scope);
 
     // グローのために少し太い半透明の複製
@@ -221,7 +221,7 @@ export class Visualizer {
       opacity: 0.3,
     });
     this.scopeGlow = new THREE.Line(g, m2);
-    this.scopeGlow.position.y = 11;
+    this.scopeGlow.position.y = 9.5;
     this.scopeGlow.scale.set(1.02, 1.6, 1.02);
     this.scene.add(this.scopeGlow);
   }
@@ -231,7 +231,7 @@ export class Visualizer {
     const g = this.scope.geometry;
     const pos = g.attributes.position;
     const N = this.scopeN;
-    const radius = 13;
+    const radius = 10;
     const step = Math.floor(this.waveBuffer.length / N);
 
     for (let i = 0; i < N; i++) {
